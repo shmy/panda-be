@@ -1,0 +1,49 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+	id 'jacoco'
+	id "org.sonarqube" version "2.7"
+}
+
+group = 'com.tw.panda'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile: 'org.sonarsource.sonarqube:sonar-plugin-api:8.1.0.31237'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled false
+		html.enabled true
+	}
+}
+
+subprojects{
+	sonarqube{
+		properties {
+			property "sonar.sourceEncoding", "UTF-8"
+			property "sonar.host.url", "http://localhost:9000/"
+			property "sonar.jdbc.url", "jdbc:mysql://my.server.com/sonar"
+			property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+			property "sonar.jdbc.username", "sonar"
+			property "sonar.jdbc.password", "sonar"
+		}
+	}
+}
+
+check.dependsOn jacocoTestReport
