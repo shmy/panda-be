@@ -5,6 +5,7 @@ plugins {
 	id 'jacoco'
 	id 'checkstyle'
 	id "org.sonarqube" version "2.7"
+	id "com.github.spotbugs"
 }
 
 group = 'com.tw.panda'
@@ -16,6 +17,7 @@ repositories {
 }
 
 dependencies {
+	compile 'com.github.spotbugs:spotbugs:3.1.12'
 	implementation 'org.sonarsource.sonarqube:sonar-plugin-api:8.1.0.31237'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
