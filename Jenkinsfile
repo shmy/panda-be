@@ -24,5 +24,11 @@ pipeline {
       }
     }
 
+    stage('Deploy') {
+      steps {
+        sh 'docker.build(\'panda-be\')'
+      }
+    }
+
   }
 }
