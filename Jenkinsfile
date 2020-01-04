@@ -24,9 +24,17 @@ pipeline {
       }
     }
 
-    stage('Deploy') {
+    stage('Build Image') {
       steps {
-        sh 'docker.build(\'panda-be\')'
+        docker.build('panda-be')
+      }
+    }
+
+    stage('Push Image') {
+      steps {
+        docker.withRegistry('955095959256.dkr.ecr.cn-northwest-1.amazonaws.com.cn', 'ecr:cn-northwest-1:panda-ecr') {
+          docker.image('panda-be').push('latest')
+        }
       }
     }
 
