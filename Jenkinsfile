@@ -1,20 +1,18 @@
 pipeline {
-  agent {
-    docker {
-      image 'gradle:jdk11'
-    }
+  agent any
 
-  }
   stages {
     stage('Build') {
       steps {
-        sh './gradlew build -x test'
+        sh './gradlew clean build'
       }
     }
 
-    stage('Test') {
+    stage('Build Image') {
       steps {
-        sh './gradlew test'
+        script {
+          docker.build('panda-be')
+        }
       }
     }
 
