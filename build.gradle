@@ -3,10 +3,11 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 	id 'jacoco'
-	id 'checkstyle'
 	id "org.sonarqube" version "2.7"
 	id "com.github.spotbugs" version"3.0.0"
 }
+
+apply from: './config/checkstyle/checkstyle.gradle'
 
 group = 'com.tw.panda'
 version = '0.0.1-SNAPSHOT'
@@ -46,21 +47,6 @@ subprojects{
 			property "sonar.jdbc.password", "sonar"
 		}
 	}
-}
-
-
-checkstyle {
-	toolVersion = '8.8'
-}
-
-task checkStyleMain()
-
-task checkstyle(type: Checkstyle) {
-	source 'src'
-	include '**/*.java'
-	exclude '**/gen/**'
-	exclude "**/test/**"
-	classpath = files()
 }
 
 check.dependsOn jacocoTestReport
