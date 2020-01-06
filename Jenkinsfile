@@ -24,14 +24,6 @@ pipeline {
       }
     }
 
-    stage('Build Image') {
-      steps {
-        script {
-          docker.build('panda-be')
-        }
-      }
-    }
-
     stage('Push Image') {
       steps {
         script {
@@ -39,6 +31,7 @@ pipeline {
             docker.image('panda-be').push('latest')
           }
         }
+
       }
     }
 
