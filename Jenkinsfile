@@ -1,6 +1,5 @@
 pipeline {
   agent any
-
   stages {
     stage('Build') {
       steps {
@@ -16,6 +15,13 @@ pipeline {
             docker.image('panda-be').push('latest')
           }
         }
+
+      }
+    }
+
+    stage('Clean') {
+      steps {
+        sh 'docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi'
       }
     }
 
