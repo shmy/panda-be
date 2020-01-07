@@ -7,6 +7,13 @@ pipeline {
       }
     }
 
+    stage('Sonar Scan') {
+      steps {
+        sh './gradlew sonarqube -x test'
+      }
+    }
+
+
     stage('Deploy') {
       steps {
         script {
@@ -15,15 +22,14 @@ pipeline {
             docker.image('panda-be').push('latest')
           }
         }
-
+      }
+      post {
+        success {
+          sh 'docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi'
+        }
       }
     }
 
-    stage('Clean') {
-      steps {
-        sh 'docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi'
-      }
-    }
 
   }
 }
