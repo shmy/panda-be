@@ -38,7 +38,7 @@ jacocoTestReport {
 sonarqube{
 	properties {
 		property "sonar.sourceEncoding", "UTF-8"
-		property "sonar.host.url", "sonar:9000"
+		property "sonar.host.url", "http://52.82.10.96:9000"
 	}
 }
 
