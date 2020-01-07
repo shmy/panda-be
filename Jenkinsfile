@@ -9,17 +9,7 @@ pipeline {
 
     stage('Sonar Scan') {
       steps {
-        withSonarQubeEnv('Panda SonarQube') {
           sh './gradlew sonarqube -x test'
-        }
-      }
-    }
-
-    stage('Quality Gate') {
-      steps {
-        timeout(time: 1, unit: 'HOURS') {
-          waitForQualityGate abortPipeline: true
-        }
       }
     }
 
