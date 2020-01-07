@@ -9,7 +9,17 @@ pipeline {
 
     stage('Sonar Scan') {
       steps {
-        sh './gradlew sonarqube -x test'
+        withSonarQubeEnv('My SonarQube Server') {
+          sh './gradlew sonarqube -x test'
+        }
+      }
+
+      post {
+        always {
+          timeout(time: 1, unit: 'HOURS') {
+            waitForQualityGate abortPipeline: true
+          }
+        }
       }
     }
 
