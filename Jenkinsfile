@@ -9,8 +9,7 @@ node {
   }
 
   stage('Deploy') {
-    docker.image('alpine').inside {
-      sh 'su'
+    docker.image('alpine').inside('-u 0:0') {
       sh 'apk add curl'
       sh 'curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl'
       sh 'chmod +x ./kubectl'
