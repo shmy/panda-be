@@ -17,8 +17,8 @@ node {
     }
 
     dir('config/k8s') {
-      docker.image('alpine').inside('-u 0:0') {
-        sh 'apk add curl'
+      docker.image('ubuntu').inside('-u 0:0') {
+        sh 'apt-get update && apt-get install --yes curl'
         sh 'curl -LO https://s3.cn-north-1.amazonaws.com.cn/kops-bjs/fileRepository/kubernetes-release/release/v1.15.5/bin/linux/amd64/kubectl'
         sh 'chmod +x ./kubectl'
         sh './kubectl --kubeconfig=k8s-config delete deployment/panda-be-deployment --ignore-not-found=true'
