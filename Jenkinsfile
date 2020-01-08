@@ -29,14 +29,4 @@ node {
     }
   }
 
-  post {
-    success {
-      sh 'docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi'
-    }
-    failure {
-      mail to: 'team@example.com',
-           subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-           body: "Something is wrong with ${env.BUILD_URL}"
-    }
-  }
 }
