@@ -5,7 +5,7 @@ metadata:
   labels:
     app: panda-be
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: panda-be
