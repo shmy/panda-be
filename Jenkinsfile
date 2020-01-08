@@ -7,25 +7,11 @@ pipeline {
       }
     }
 
-    stage('Sonar Scan') {
-      steps {
-          sh './gradlew sonarqube -x test'
-      }
-    }
-
     stage('Deploy') {
-      steps {
-        script {
-          docker.build('panda-be')
-          docker.withRegistry('https://955095959256.dkr.ecr.cn-northwest-1.amazonaws.com.cn', 'ecr:cn-northwest-1:panda-ecr') {
-            docker.image('panda-be').push('latest')
-          }
-        }
-      }
-      post {
-        success {
-          sh 'docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi'
-        }
+      docker.image('bitnami/kubectl').inside {
+        sh 'kubectl --kubeconfig=k8s-config delete deployment/panda-be-deployment'
+        sh 'kubectl --kubeconfig=k8s-config delete service/panda-be-service'
+        sh 'kubectl --kubeconfig=k8s-config create -f panda-be.yaml'
       }
     }
 

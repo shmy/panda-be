@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: panda-be-deployment
+  labels:
+    app: panda-be
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: panda-be
+  template:
+    metadata:
+      labels:
+        app: panda-be
+    spec:
+      containers:
+      - name: panda-be
+        image: 955095959256.dkr.ecr.cn-northwest-1.amazonaws.com.cn/panda-be:latest
+        ports:
+        - containerPort: 8889
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: panda-be-service
+  labels:
+    app: panda-be
+spec:
+  ports:
+  - port: 8889
+    nodePort: 30303 
+    targetPort: 8889
+  selector:
+    app: panda-be
+  type: NodePort
