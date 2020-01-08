@@ -23,7 +23,7 @@ node {
         sh 'chmod +x ./kubectl'
         sh './kubectl --kubeconfig=k8s-config delete deployment/panda-be-deployment --ignore-not-found=true'
         sh './kubectl --kubeconfig=k8s-config delete service/panda-be-service --ignore-not-found=true'
-        sh 'sleep 45'
+        sh 'sleep 60'
         sh './kubectl --kubeconfig=k8s-config create -f panda-be.yaml'
       }
     }
