@@ -1,10 +1,10 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.2.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-	id 'java'
-	id 'jacoco'
-	id "org.sonarqube" version "2.8"
-	id "com.github.spotbugs" version"3.0.0"
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+    id 'jacoco'
+    id "org.sonarqube" version "2.8"
+    id "com.github.spotbugs" version "3.0.0"
 }
 
 apply from: './config/checkstyle/checkstyle.gradle'
@@ -14,54 +14,54 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation ('org.springframework.boot:spring-boot-starter-web') {
-		exclude group: 'org.slf4j', module: 'slf4j-nop'
-	}
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
-	testImplementation 'junit:junit:4.13'
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.slf4j', module: 'slf4j-nop'
+    }
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'junit:junit:4.13'
 
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 jacocoTestReport {
-	reports {
-		xml.enabled false
-		html.enabled true
+    reports {
+        xml.enabled false
+        html.enabled true
 
-	}
+    }
 }
 
 
 jacocoTestCoverageVerification {
-	violationRules {
-		rule {
-			enabled = true
-			element = 'PACKAGE'
-			includes = ['com.tw.panda.panda.controller']
+    violationRules {
+        rule {
+            enabled = true
+            element = 'PACKAGE'
+            includes = ['com.tw.panda.panda.controller']
 
-			limit {
-				counter = 'LINE'
-				value = 'COVEREDRATIO'
-				minimum = 0.5
-			}
-		}
-	}
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.5
+            }
+        }
+    }
 }
 
-sonarqube{
-	properties {
-		property "sonar.sourceEncoding", "UTF-8"
-		property "sonar.host.url", "http://52.82.10.96:9000"
-	}
+sonarqube {
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.host.url", "http://52.82.35.37:9000/"
+    }
 }
 
 check.dependsOn jacocoTestReport
