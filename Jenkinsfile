@@ -17,16 +17,18 @@ node {
     }
 
     dir('config/k8s') {
-      docker.image('ubuntu').inside('-u 0:0') {
-        sh 'apt-get update && apt-get install --yes curl'
+      def exists = fileExists './kubectl'
+      if (!exists) {
         sh 'curl -LO https://s3.cn-north-1.amazonaws.com.cn/kops-bjs/fileRepository/kubernetes-release/release/v1.15.5/bin/linux/amd64/kubectl'
         sh 'chmod +x ./kubectl'
-        sh './kubectl --kubeconfig=k8s-config delete deployment/panda-be-deployment --ignore-not-found=true'
-        sh './kubectl --kubeconfig=k8s-config delete service/panda-be-service --ignore-not-found=true'
-        sh 'sleep 90'
-        sh './kubectl --kubeconfig=k8s-config create -f panda-be.yaml'
       }
+
+      sh './kubectl --kubeconfig=k8s-config delete deployment/panda-be-deployment --ignore-not-found=true'
+      sh './kubectl --kubeconfig=k8s-config delete service/panda-be-service --ignore-not-found=true'
+      sh 'sleep 90'
+      sh './kubectl --kubeconfig=k8s-config create -f panda-be.yaml'
     }
+
   }
 
 }
