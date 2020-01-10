@@ -23,6 +23,12 @@ node {
         sh 'chmod +x ./kubectl'
       }
 
+      sh 'eval "cat <<EOF
+          $(< panda-be-template.yaml)
+          EOF
+          "  > panda-be.yaml'
+
+      sh 'cat panda-be.yaml'
       sh 'BUILD_NUM=${BUILD_NUMBER} && ./kubectl apply -f panda-be.yaml'
     }
 
