@@ -60,7 +60,7 @@ jacocoTestCoverageVerification {
 sonarqube {
     properties {
         property "sonar.sourceEncoding", "UTF-8"
-        property "sonar.host.url", "http://52.82.35.37:9000/"
+        property "sonar.host.url", "http://panda-sonar-1100401901.cn-northwest-1.elb.amazonaws.com.cn:9000"
         property "sonar.login","admin"
         property "sonar.password","admin"
     }
