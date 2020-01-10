@@ -27,6 +27,7 @@ metadata:
   labels:
     app: panda-be
 spec:
+  clusterIP: 10.0.17.121
   ports:
   - port: 8889
     nodePort: 30303 
