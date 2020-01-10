@@ -23,8 +23,8 @@ node {
         sh 'chmod +x ./kubectl'
       }
 
-      sh 'eval "cat <<EOF
-          $(< panda-be-template.yaml)
+      sh 'eval "cat <<EOF \
+          $(< panda-be-template.yaml) \
           EOF
           "  > panda-be.yaml'
 
