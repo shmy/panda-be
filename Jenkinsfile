@@ -29,7 +29,11 @@ node {
           "  > panda-be.yaml'
 
       sh 'cat panda-be.yaml'
-      sh 'BUILD_NUM=${BUILD_NUMBER} && ./kubectl apply -f panda-be.yaml'
+      sh 'chmod +x ./eval-replace.sh'
+      sh 'export BUILD_NUM=${BUILD_NUMBER} && ./eval-replace'
+
+      sh 'cat panda-be.yaml'
+      sh './kubectl apply -f panda-be.yaml'
     }
 
   }
