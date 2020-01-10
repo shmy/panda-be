@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: panda-be
-        image: 955095959256.dkr.ecr.cn-northwest-1.amazonaws.com.cn/panda-be:latest
+        image: 955095959256.dkr.ecr.cn-northwest-1.amazonaws.com.cn/panda-be:$(BUILD_NUM)
         ports:
         - containerPort: 8889
 ---

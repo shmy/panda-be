@@ -13,7 +13,7 @@ node {
   stage('Deploy') {
     docker.build('panda-be')
     docker.withRegistry('https://955095959256.dkr.ecr.cn-northwest-1.amazonaws.com.cn', 'ecr:cn-northwest-1:panda-ecr') {
-      docker.image('panda-be').push('latest')
+      docker.image('panda-be').push('${BUILD_NUMBER}')
     }
 
     dir('config/k8s') {
@@ -23,7 +23,7 @@ node {
         sh 'chmod +x ./kubectl'
       }
 
-      sh './kubectl apply -f panda-be.yaml'
+      sh 'BUILD_NUM=${BUILD_NUMBER} && ./kubectl apply -f panda-be.yaml'
     }
 
   }
