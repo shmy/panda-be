@@ -25,7 +25,7 @@ node {
 
       sh 'eval "cat <<EOF \
           $(< panda-be-template.yaml) \
-          EOF
+          EOF \
           "  > panda-be.yaml'
 
       sh 'cat panda-be.yaml'
