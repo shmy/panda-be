@@ -30,8 +30,6 @@ spec:
   clusterIP: 10.0.17.121
   ports:
   - port: 8889
-    nodePort: 30303 
     targetPort: 8889
   selector:
     app: panda-be
-  type: NodePort
