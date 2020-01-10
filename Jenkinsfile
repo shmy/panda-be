@@ -17,7 +17,7 @@ node {
     }
 
     dir('config/k8s') {
-      def exists = fileExists 'kubectl'
+      def exists = fileExists('./kubectl')
       println  exists
       if (!exists) {
         sh 'curl -LO https://s3.cn-north-1.amazonaws.com.cn/kops-bjs/fileRepository/kubernetes-release/release/v1.15.5/bin/linux/amd64/kubectl'
@@ -25,7 +25,7 @@ node {
       }
 
       sh 'chmod +x ./eval-replace.sh'
-      sh 'export BUILD_NUM=${BUILD_NUMBER} && ./eval-replace'
+      sh 'export BUILD_NUM=${BUILD_NUMBER} && ./eval-replace.sh'
 
       sh 'cat panda-be.yaml'
       sh './kubectl apply -f panda-be.yaml'
