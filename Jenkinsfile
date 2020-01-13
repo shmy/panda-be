@@ -24,11 +24,7 @@ node {
         sh 'chmod +x ./kubectl'
       }
 
-      sh 'chmod +x ./eval-replace.sh'
-      sh 'export BUILD_NUM=${BUILD_NUMBER} && ./eval-replace.sh'
-
-      sh 'cat panda-be.yaml'
-      sh './kubectl apply -f panda-be.yaml'
+      sh 'sed -e "s#{BUILD_NUM}#${BUILD_NUMBER}#g" panda-be.yaml |./kubectl apply -f -'
     }
 
   }
