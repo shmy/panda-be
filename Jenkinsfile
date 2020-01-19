@@ -1,7 +1,7 @@
 #!groovy
-def label = "jenkins-slave"
-podTemplate(label: label, cloud: 'kubernetes'){
-  node(label) {
+// def label = "jenkins-slave"
+// podTemplate(label: label, cloud: 'kubernetes'){
+  node {
 
     stage('Build') {
       checkout scm
@@ -32,4 +32,4 @@ podTemplate(label: label, cloud: 'kubernetes'){
 
   }
 
-}
+// }
