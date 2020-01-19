@@ -10,7 +10,6 @@ node(label) {
   stage('Sonar Scan') {
     sh './gradlew sonarqube -x test'
   }
-
   stage('Deploy') {
     docker.build('panda-be')
     docker.withRegistry('https://955095959256.dkr.ecr.cn-northwest-1.amazonaws.com.cn', 'ecr:cn-northwest-1:panda-ecr') {
