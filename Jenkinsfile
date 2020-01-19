@@ -1,5 +1,6 @@
 #!groovy
-node {
+def label = "jenkins-slave"
+node(label) {
 
   stage('Build') {
     checkout scm
